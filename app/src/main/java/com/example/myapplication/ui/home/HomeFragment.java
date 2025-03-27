@@ -1,15 +1,18 @@
 package com.example.myapplication.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myapplication.Camera2;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -26,6 +29,14 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Sửa lỗi findViewById và Intent
+        Button btnCheck = binding.btn3;
+        btnCheck.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), Camera2.class);
+            startActivity(intent);
+        });
+
         return root;
     }
 

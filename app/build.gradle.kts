@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.chaquo.python")
 }
 
 android {
@@ -14,6 +15,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.addAll(listOf("arm64-v8a", "x86_64"))
+        }
     }
 
     buildTypes {
@@ -25,26 +30,60 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    // ✅ Bật View Binding
     buildFeatures {
         viewBinding = true
+    }
+
+    flavorDimensions.add("pyVersion")
+
+    productFlavors {
+        create("py310") {
+            dimension = "pyVersion"
+        }
+        create("py311") {
+            dimension = "pyVersion"
+        }
+    }
+}
+
+chaquopy {
+    productFlavors {
+        getByName("py310") {
+            version = "3.10"
+            pip {
+                install("numpy")
+                install("requests")
+                install("pillow")
+            }
+        }
+
+        getByName("py311") {
+            version = "3.11"
+            pip {
+                install("pandas")
+                install("scipy")
+            }
+        }
     }
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
     implementation(libs.activity)
+    implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.vanniktech:android-image-cropper:4.6.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.databinding:viewbinding:8.2.0")
 }

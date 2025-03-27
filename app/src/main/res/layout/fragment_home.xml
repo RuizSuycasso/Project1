@@ -61,10 +61,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
         android:text="Hello!"
-        android:textColor="#622DC1"
-        android:textSize="45dp"
+        android:textColor="#489CAD"
+        android:textSize="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="cursive"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
