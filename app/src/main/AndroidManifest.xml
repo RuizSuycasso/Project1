@@ -28,6 +28,9 @@
             android:name=".Benhan_option"
             android:exported="false" />
         <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
             android:name=".Main_Screen2"
             android:exported="false" />
         <activity
