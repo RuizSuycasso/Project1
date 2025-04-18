@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.chaquo.python")
+    id("com.chaquo.python")  // Đã thêm lại Chaquopy
 }
 
 android {
@@ -39,27 +39,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
-    flavorDimensions("pyVersion")
-
-    productFlavors {
-        create("py310") {
-            dimension = "pyVersion"
-        }
-    }
 }
-
-chaquopy {
-    defaultConfig {
-        version = "3.8"
-        pip {
-            install("opencv-python")
-            install("numpy")
-            install("pillow")
-        }
-    }
-}
-
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -72,10 +52,22 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.databinding:viewbinding:8.2.0")
+
+    // Đã thêm lại ML Kit
     implementation("com.google.mlkit:text-recognition:16.0.0")
     implementation("com.google.mlkit:text-recognition-devanagari:16.0.0")
     implementation("com.google.mlkit:text-recognition-chinese:16.0.0")
     implementation("com.google.mlkit:text-recognition-japanese:16.0.0")
     implementation("com.google.mlkit:text-recognition-korean:16.0.0")
+
+    // Đã thêm lại Tesseract
     implementation("com.rmtheis:tess-two:9.1.0")
+
+    // Room Database đã thêm trước đó
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.google.android.material:material:1.11.0")
 }
