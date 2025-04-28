@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
-        tools:targetApi="31">
+        tools:targetApi="36">
         <activity
             android:name=".ViewBenhAnActivity"
             android:exported="false" />
@@ -52,6 +52,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!--  ADDED EditBenhAnActivity HERE -->
+        <activity
+            android:name=".EditBenhAnActivity"
+            android:exported="false" />
+        <!--  END ADDED EditBenhAnActivity -->
+
     </application>
 
 </manifest>

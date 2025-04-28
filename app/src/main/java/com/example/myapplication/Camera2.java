@@ -2,9 +2,9 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.database.Cursor;
+// import android.database.Cursor; // Không dùng
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.BitmapFactory; // Không dùng
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,15 +21,13 @@ import com.canhub.cropper.CropImageContract;
 import com.canhub.cropper.CropImageContractOptions;
 import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
-import com.chaquo.python.PyObject;
-import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
+// Không cần import bất cứ thứ gì của Chaquopy nữa
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-import java.io.ByteArrayOutputStream;
+// import java.io.ByteArrayOutputStream; // Có vẻ không dùng, có thể xóa
 
 public class Camera2 extends AppCompatActivity {
 
@@ -48,8 +46,7 @@ public class Camera2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera2);
 
-        // Initialize Python
-        initPython();
+        // Không còn gọi initPython() nữa
 
         // Initialize ML Kit Text Recognizer
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
@@ -68,17 +65,7 @@ public class Camera2 extends AppCompatActivity {
         btnLibrary.setOnClickListener(v -> openGallery());
     }
 
-    private void initPython() {
-        if (!Python.isStarted()) {
-            try {
-                Python.start(new AndroidPlatform(this));
-            } catch (Exception e) {
-                Toast.makeText(this, "Error initializing Python: " + e.getMessage(),
-                        Toast.LENGTH_LONG).show();
-                finish();
-            }
-        }
-    }
+    // Không cần hàm initPython() nữa
 
     private void initializeLaunchers() {
         // Camera permission launcher
@@ -165,10 +152,11 @@ public class Camera2 extends AppCompatActivity {
     private void startImageCrop(Uri imageUri) {
         CropImageOptions options = new CropImageOptions();
         options.guidelines = CropImageView.Guidelines.ON;
-        options.aspectRatioX = 1;
-        options.aspectRatioY = 1;
-        options.outputCompressFormat = Bitmap.CompressFormat.PNG;
-        options.outputCompressQuality = 90;
+        // Bạn có thể điều chỉnh hoặc xóa bỏ các tùy chọn cắt ảnh nếu muốn
+        // options.aspectRatioX = 1;
+        // options.aspectRatioY = 1;
+        options.outputCompressFormat = Bitmap.CompressFormat.PNG; // Hoặc JPEG
+        options.outputCompressQuality = 90; // Chất lượng ảnh nén
 
         CropImageContractOptions cropOptions = new CropImageContractOptions(imageUri, options);
         cropImageLauncher.launch(cropOptions);
@@ -176,21 +164,27 @@ public class Camera2 extends AppCompatActivity {
 
     private void processImage(Uri imageUri) {
         try {
+            // Sử dụng try-with-resources sẽ tốt hơn nếu làm việc với InputStream
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
             if (bitmap != null) {
-                // Perform OCR directly without saving
                 InputImage inputImage = InputImage.fromBitmap(bitmap, 0);
                 textRecognizer.process(inputImage)
                         .addOnSuccessListener(text -> {
                             String recognizedText = text.getText();
-                            resultTextView.setText(recognizedText);
+                            resultTextView.setText(recognizedText); // Hiển thị kết quả OCR
                             Toast.makeText(Camera2.this, "OCR successful!", Toast.LENGTH_SHORT).show();
+                            // Có thể bạn muốn làm gì đó khác với recognizedText ở đây
                         })
                         .addOnFailureListener(e -> {
+                            resultTextView.setText("OCR Error: " + e.getMessage()); // Hiển thị lỗi
                             Toast.makeText(Camera2.this, "OCR error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
+            } else {
+                resultTextView.setText("Could not decode bitmap from URI.");
+                Toast.makeText(this, "Could not decode bitmap", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            resultTextView.setText("Processing Error: " + e.getMessage()); // Hiển thị lỗi
             Toast.makeText(this, "Image processing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

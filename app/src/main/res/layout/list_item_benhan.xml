@@ -4,35 +4,122 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="16dp"
     android:layout_marginBottom="8dp"
-    android:background="?android:attr/selectableItemBackground"> <!-- Hiệu ứng khi click -->
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
-    <TextView
-        android:id="@+id/tvItemId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:text="ID: 1"/>
+    <!-- ID (Giữ nguyên) -->
+<TextView
+android:id="@+id/tvItemId"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textSize="12sp"
+android:textStyle="italic"
+android:textColor="@android:color/darker_gray"
+tools:text="ID: 1"/>
 
-    <TextView
-        android:id="@+id/tvItemDiagnosis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="4dp"
-        tools:text="Chẩn đoán: Viêm họng cấp" />
+    <!-- Chẩn đoán (Giữ nguyên) -->
+<TextView
+android:id="@+id/tvItemDiagnosis"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:textSize="18sp"
+android:textStyle="bold"
+android:layout_marginTop="4dp"
+android:textColor="@android:color/black"
+tools:text="Chẩn đoán: Viêm họng cấp" />
 
-    <TextView
-        android:id="@+id/tvItemMedicalHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="4dp"
-        tools:text="Tiền sử: Khỏe mạnh"/>
+    <!-- Tiền sử (Giữ nguyên) -->
+<TextView
+android:id="@+id/tvItemMedicalHistory"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:textSize="16sp"
+android:layout_marginTop="6dp"
+tools:text="Tiền sử: Khỏe mạnh"/>
 
-    <!-- Có thể thêm các TextView khác nếu muốn hiển thị thêm thông tin -->
 
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginTop="6dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:text="Xét nghiệm: "/>
+<TextView
+    android:id="@+id/tvItemLabResults"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    tools:text="Công thức máu bình thường"/>
 </LinearLayout>
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginTop="4dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:text="Dị ứng: "/>
+<TextView
+    android:id="@+id/tvItemAllergies"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    tools:text="Không rõ"/>
+</LinearLayout>
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginTop="4dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:text="Thuốc: "/>
+<TextView
+    android:id="@+id/tvItemCurrentMedications"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    tools:text="Paracetamol 500mg"/>
+</LinearLayout>
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginTop="4dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:text="Giai đoạn: "/>
+<TextView
+    android:id="@+id/tvItemDiseaseStage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    tools:text="Cấp tính"/>
+</LinearLayout>
+
+    </LinearLayout>

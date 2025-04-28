@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast; // Import Toast
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+// Cần import AppDatabase
+import com.example.myapplication.AppDatabase;
 
 public class ViewBenhAnActivity extends AppCompatActivity {
 
@@ -25,55 +27,55 @@ public class ViewBenhAnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_benh_an);
 
         recyclerView = findViewById(R.id.recyclerViewBenhAn);
-        tvEmptyList = findViewById(R.id.tvEmptyList);
+        tvEmptyList = findViewById(R.id.tvEmptyList); // Đảm bảo ID này đúng trong XML
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true); // Tối ưu hóa nếu kích thước item không đổi
+        recyclerView.setHasFixedSize(true);
 
         adapter = new BenhAnAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Lấy DAO
         benhAnDao = AppDatabase.getInstance(this).benhAnDao();
 
-        // --- CẢNH BÁO: Thao tác DB trên luồng chính ---
-        loadBenhAnData();
-        // -------------------------------------------
+        // Không load ở đây nữa, sẽ load trong onResume
 
-        // Xử lý sự kiện click vào item
         adapter.setOnItemClickListener(benhAn -> {
-            // Mở EditBenhAnActivity và truyền ID
             Intent intent = new Intent(ViewBenhAnActivity.this, EditBenhAnActivity.class);
-            // Đặt tên EXTRA rõ ràng
             intent.putExtra(EditBenhAnActivity.EXTRA_BENHAN_ID, benhAn.id);
             startActivity(intent);
-            // Không cần startActivityForResult nếu chỉ muốn mở và sửa
         });
+
+        // Đặt tiêu đề
+        setTitle("Danh sách Bệnh án");
     }
 
-    // Load lại dữ liệu khi Activity quay lại (ví dụ sau khi sửa/xóa)
     @Override
     protected void onResume() {
         super.onResume();
-        // --- CẢNH BÁO: Thao tác DB trên luồng chính ---
+        // --- THAY ĐỔI: Load dữ liệu trên background thread mỗi khi quay lại ---
         loadBenhAnData();
-        // -------------------------------------------
+        // ---------------------------------------------------------------
     }
 
     private void loadBenhAnData() {
-        // --- CẢNH BÁO: Thao tác DB trên luồng chính ---
-        List<BenhAn> list = benhAnDao.getAllBenhAn();
-        // -------------------------------------------
+        // --- THAY ĐỔI: Thực thi trên background thread ---
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            List<BenhAn> list = benhAnDao.getAllBenhAn();
 
-        adapter.setBenhAnList(list); // Cập nhật dữ liệu cho adapter
+            // Quay lại Main thread để cập nhật Adapter và UI
+            runOnUiThread(() -> {
+                adapter.setBenhAnList(list); // Cập nhật dữ liệu cho adapter
 
-        // Hiển thị thông báo nếu danh sách rỗng
-        if (list == null || list.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            tvEmptyList.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            tvEmptyList.setVisibility(View.GONE);
-        }
+                // Hiển thị thông báo nếu danh sách rỗng
+                if (list == null || list.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    tvEmptyList.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    tvEmptyList.setVisibility(View.GONE);
+                }
+            });
+        });
+        // ---------------------------------------------
     }
 }
