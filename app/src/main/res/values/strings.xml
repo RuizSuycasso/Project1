@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My Application</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -11,5 +12,29 @@
     <string name="menu_gallery">Thông tin cá nhân</string>
     <string name="menu_slideshow">Cài đặt</string>
     <string name="menu_logout">Đăng xuất</string>
+
+    <!-- Strings for fragment_gallery.xml (Edit Account Screen) -->
+    <string name="edit_account_title">Chỉnh sửa thông tin tài khoản</string>
+    <string name="label_name">Tên:</string>
+    <string name="hint_name">Nhập tên của bạn</string>
+    <string name="label_username">Tên đăng nhập:</string>
+    <string name="hint_username_uneditable">Không thể chỉnh sửa</string>
+    <string name="label_phone">Số điện thoại:</string>
+    <string name="hint_phone">Nhập số điện thoại</string>
+    <string name="label_address">Địa chỉ:</string>
+    <string name="hint_address">Nhập địa chỉ</string>
+    <string name="button_save_changes">Lưu thay đổi</string>
+    <string name="button_change_password">Đổi mật khẩu</string>
+
+    <!-- Strings for change password dialog -->
+    <string name="hint_old_password">Mật khẩu cũ</string>
+    <string name="hint_new_password">Mật khẩu mới</string>
+    <string name="hint_confirm_password">Xác nhận mật khẩu mới</string>
+    <string name="error_password_mismatch">Xác nhận mật khẩu mới không khớp!</string>
+    <string name="error_password_empty">Mật khẩu mới không được để trống!</string>
+    <string name="error_old_password_incorrect">Mật khẩu cũ không đúng!</string>
+    <string name="success_password_changed">Mật khẩu đã được thay đổi!</string>
+    <string name="error_password_save">Lỗi khi lưu mật khẩu mới.</string>
+    <string name="error_password_processing">Lỗi nội bộ khi xử lý mật khẩu.</string>
 
 </resources>

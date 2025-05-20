@@ -1,37 +1,28 @@
-package com.example.myapplication; // Thay đổi package nếu cần
+package com.example.myapplication;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update; // <<< PHẢI CÓ IMPORT NÀY
 
-@Dao // Đánh dấu đây là một Data Access Object
+@Dao
 public interface UserDAO {
 
-    /**
-     * Chèn một user mới vào database.
-     * Nếu username đã tồn tại (do có index unique), việc chèn sẽ bị bỏ qua.
-     * @param user Đối tượng User cần chèn.
-     * @return rowId của bản ghi mới được chèn, hoặc -1 nếu bị bỏ qua do xung đột.
-     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    long insert(User user); // Nên chạy trên luồng nền
+    long insert(User user);
 
-    /**
-     * Tìm một user trong database dựa vào username.
-     * @param username Tên đăng nhập cần tìm.
-     * @return Đối tượng User nếu tìm thấy, hoặc null nếu không tìm thấy.
-     */
+    // <<< PHƯƠNG THỨC UPDATE NÀY PHẢI CÓ >>>
+    @Update
+    void update(User user);
+    // ------------------------------------
+
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
-    User findByUsername(String username); // Nên chạy trên luồng nền
+    User findByUsername(String username);
 
-    /**
-     * Lấy tên đầy đủ (name) của user dựa vào username.
-     * Hữu ích cho việc hiển thị thông tin mà không cần load cả object User.
-     * @param username Tên đăng nhập của user.
-     * @return Tên đầy đủ (String) của user nếu tìm thấy, hoặc null nếu không tìm thấy.
-     */
     @Query("SELECT name FROM users WHERE username = :username LIMIT 1")
-    String getNameByUsername(String username); // Nên chạy trên luồng nền
+    String getNameByUsername(String username);
 
+    @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
+    User findById(int userId);
 }

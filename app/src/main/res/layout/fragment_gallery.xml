@@ -8,11 +8,12 @@
     android:padding="16dp"
     tools:context=".ui.gallery.GalleryFragment">
 
+    <!-- Tiêu đề màn hình -->
     <TextView
         android:id="@+id/textGallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chỉnh sửa thông tin tài khoản"
+        android:text="@string/edit_account_title"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,107 +21,128 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
 
+
     <TextView
         android:id="@+id/tvNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:text="Tên:"
+        android:text="@string/label_name"
         android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/textGallery"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textGallery" />
+        android:layout_marginStart="8dp" />
 
     <EditText
         android:id="@+id/edtName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="88dp"
+        android:minHeight="48dp"
         android:inputType="textPersonName"
+        android:hint="@string/hint_name"
         android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/tvNameLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tvNameLabel"
+        app:layout_constraintStart_toEndOf="@id/tvNameLabel"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/tvNameLabel"
-        app:layout_constraintTop_toBottomOf="@id/textGallery" />
+        android:importantForAccessibility="yes"
+        android:autofillHints="personGivenName" />
+
+
 
     <TextView
         android:id="@+id/tvUsernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Tên đăng nhập:"
+        android:text="@string/label_username"
         android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtName"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNameLabel" />
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:enabled="false"
-        android:hint="Không thể chỉnh sửa"
+        android:minHeight="48dp"
+        android:hint="@string/hint_username_uneditable"
         android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/tvUsernameLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tvUsernameLabel"
+        app:layout_constraintStart_toEndOf="@id/tvUsernameLabel"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/tvUsernameLabel"
-        app:layout_constraintTop_toBottomOf="@id/tvNameLabel" />
+        android:importantForAccessibility="yes" />
 
     <TextView
         android:id="@+id/tvPhoneLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Số điện thoại:"
+        android:text="@string/label_phone"
         android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/tvUsername"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsernameLabel" />
+        android:layout_marginStart="8dp" />
 
     <EditText
         android:id="@+id/edtPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:inputType="phone"
+        android:hint="@string/hint_phone"
         android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/tvPhoneLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tvPhoneLabel"
+        app:layout_constraintStart_toEndOf="@id/tvPhoneLabel"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/tvPhoneLabel"
-        app:layout_constraintTop_toBottomOf="@id/tvUsernameLabel" />
+        android:importantForAccessibility="yes"
+        android:autofillHints="phone" />
 
+
+    <!-- Label và Input cho Địa chỉ -->
     <TextView
         android:id="@+id/tvAddressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="Địa chỉ:"
+        android:text="@string/label_address"
         android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtPhone"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneLabel" />
+        android:layout_marginStart="8dp" />
 
     <EditText
         android:id="@+id/edtAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:minHeight="48dp"
         android:inputType="textPostalAddress"
+        android:hint="@string/hint_address"
         android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/tvAddressLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tvAddressLabel"
+        app:layout_constraintStart_toEndOf="@id/tvAddressLabel"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/tvAddressLabel"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneLabel" />
+        android:importantForAccessibility="yes"
+        android:autofillHints="postalAddress" />
 
+
+    <!-- Nút Lưu Thay Đổi -->
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lưu thay đổi"
+        android:text="@string/button_save_changes"
         app:layout_constraintTop_toBottomOf="@id/edtAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,10 +152,11 @@
         android:id="@+id/btnChangePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đổi mật khẩu"
+        android:text="@string/button_change_password"
         app:layout_constraintTop_toBottomOf="@id/btnSave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

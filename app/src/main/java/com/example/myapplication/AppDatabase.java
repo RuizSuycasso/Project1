@@ -5,35 +5,52 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import java.util.concurrent.ExecutorService; // Thêm import
-import java.util.concurrent.Executors;     // Thêm import
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-@Database(entities = {BenhAn.class}, version = 1, exportSchema = false)
+// Đảm bảo import các Entities và DAOs
+// import com.example.myapplication.BenhAn; // Đã import ngầm
+// import com.example.myapplication.User;   // Đã import ngầm
+// import com.example.myapplication.BenhAnDao; // Đã import ngầm
+// import com.example.myapplication.UserDAO;   // Đã import ngầm
+
+// <<< THAY ĐỔI CHÍNH >>>
+// 1. Thêm User.class vào entities
+// 2. Tăng version (ví dụ lên 2, nếu bạn đã có DB cũ version 1)
+//    Hoặc đặt là 1 nếu đây là lần đầu tạo DB với cấu trúc này.
+@Database(entities = {BenhAn.class, User.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static volatile AppDatabase instance;
-    public abstract BenhAnDao benhAnDao();
+    private static volatile AppDatabase INSTANCE;
+    // Tên file DB, bạn có thể giữ "benh_an_database" hoặc đổi tên chung hơn
+    private static final String DATABASE_NAME = "my_unified_database.db";
 
-    // --- THÊM MỚI: ExecutorService để chạy DB operations trên background thread ---
+    public abstract BenhAnDao benhAnDao();
+    public abstract UserDAO userDao(); // <<< THÊM: Cung cấp UserDAO
+
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    // -----------------------------------------------------------------------
 
-    public static AppDatabase getInstance(Context context) {
-        if (instance == null) {
+    public static AppDatabase getInstance(final Context context) {
+        if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
-                                    AppDatabase.class, "benh_an_database")
-                            .fallbackToDestructiveMigration()
-                            // --- XÓA DÒNG NÀY ---
-                            // .allowMainThreadQueries()
-                            // --------------------
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, DATABASE_NAME)
+                            .fallbackToDestructiveMigration() // Giữ lại khi đang phát triển
                             .build();
                 }
             }
         }
-        return instance;
+        return INSTANCE;
+    }
+
+    // (Tùy chọn) Đóng instance nếu cần
+    public static void closeInstance() {
+        if (INSTANCE != null && INSTANCE.isOpen()) {
+            INSTANCE.close();
+        }
+        INSTANCE = null;
     }
 }

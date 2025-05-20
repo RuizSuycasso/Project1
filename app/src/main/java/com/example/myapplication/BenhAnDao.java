@@ -21,19 +21,21 @@ public interface BenhAnDao {
     @Delete
     void delete(BenhAn benhAn);
 
+    // Đổi tên để rõ ràng hơn, hoặc xóa nếu không dùng
     @Query("SELECT * FROM benhan_table ORDER BY id DESC")
-    List<BenhAn> getAllBenhAn();
+    List<BenhAn> getAllBenhAn_ForAdminOrDebug();
 
-    // --- THÊM MỚI: Lấy một bệnh án theo ID ---
     @Query("SELECT * FROM benhan_table WHERE id = :id LIMIT 1")
     BenhAn getBenhAnById(int id);
-    // ---------------------------------------
+
+    // --- THÊM MỚI: Lấy danh sách bệnh án theo userId ---
+    @Query("SELECT * FROM benhan_table WHERE userId = :userId ORDER BY id DESC")
+    List<BenhAn> getBenhAnByUserId(int userId);
+    // --------------------------------------------------
 
     /*
-    @Query("SELECT * FROM benhan_table ORDER BY id DESC")
-    LiveData<List<BenhAn>> getAllBenhAnLiveData();
-
-    @Query("SELECT * FROM benhan_table WHERE id = :id LIMIT 1")
-    LiveData<BenhAn> getBenhAnByIdLiveData(int id); // Phiên bản LiveData nếu cần
+    // Nếu dùng LiveData:
+    @Query("SELECT * FROM benhan_table WHERE userId = :userId ORDER BY id DESC")
+    LiveData<List<BenhAn>> getBenhAnByUserIdLiveData(int userId);
     */
 }

@@ -5,34 +5,27 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-// Định nghĩa Entity cho bảng "users"
-// Thêm index unique cho username để đảm bảo không trùng lặp
 @Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    private int id; // Khóa chính tự tăng
+    private int id;
 
-    @NonNull // Tên đăng nhập không được null và là duy nhất
+    @NonNull
     private String username;
 
-    @NonNull // Tên đầy đủ không được null
+    @NonNull
     private String name;
 
-    // Số điện thoại, có thể null nếu người dùng không nhập
     private String phone;
 
-    @NonNull // Mật khẩu ĐÃ ĐƯỢC BĂM, không được null
-    private String hashedPassword; // Lưu mật khẩu đã băm
+    @NonNull
+    private String hashedPassword;
 
-    // Địa chỉ, có thể null nếu người dùng không nhập
     private String address;
 
-    // --- Constructors ---
-    // Constructor mặc định cần thiết cho Room
     public User() {}
 
-    // Constructor tiện lợi để tạo đối tượng User mới (không bao gồm id tự tăng)
     public User(@NonNull String username, @NonNull String name, String phone, @NonNull String hashedPassword, String address) {
         this.username = username;
         this.name = name;
@@ -41,7 +34,6 @@ public class User {
         this.address = address;
     }
 
-    // --- Getters ---
     public int getId() { return id; }
     @NonNull public String getUsername() { return username; }
     @NonNull public String getName() { return name; }
@@ -49,8 +41,6 @@ public class User {
     @NonNull public String getHashedPassword() { return hashedPassword; }
     public String getAddress() { return address; }
 
-    // --- Setters ---
-    // Room cần setter cho id
     public void setId(int id) { this.id = id; }
     public void setUsername(@NonNull String username) { this.username = username; }
     public void setName(@NonNull String name) { this.name = name; }

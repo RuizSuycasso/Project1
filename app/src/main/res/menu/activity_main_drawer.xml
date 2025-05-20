@@ -4,6 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <!-- Các mục menu mặc định của bạn -->
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu"
@@ -16,10 +17,26 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_setting"
             android:title="@string/menu_slideshow" />
+
+
+        <item
+            android:id="@+id/nav_benhan_option"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Quản lý Bệnh án"
+        />
+
+        <item
+            android:id="@+id/nav_camera2"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Chức năng Camera/OCR" />
+
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/menu_logout" />
 
     </group>
+    
+
 </menu>
