@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:fillViewport="true"> <!-- Thêm fillViewport để LinearLayout có thể chiếm hết chiều cao nếu cần -->
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:hint="Chẩn đoán"
             android:inputType="textCapSentences|textMultiLine"  />
-
         <EditText
             android:id="@+id/etMedicalHistory"
             android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:layout_marginTop="8dp"
             android:hint="Tiền sử bệnh"
             android:inputType="textCapSentences|textMultiLine" />
-
         <EditText
             android:id="@+id/etLabResults"
             android:layout_width="match_parent"
@@ -32,7 +30,6 @@
             android:layout_marginTop="8dp"
             android:hint="Xét nghiệm chính"
             android:inputType="textCapSentences|textMultiLine" />
-
         <EditText
             android:id="@+id/etAllergies"
             android:layout_width="match_parent"
@@ -40,7 +37,6 @@
             android:layout_marginTop="8dp"
             android:hint="Dị ứng (nếu có)"
             android:inputType="textCapSentences|textMultiLine" />
-
         <EditText
             android:id="@+id/etCurrentMedications"
             android:layout_width="match_parent"
@@ -48,7 +44,6 @@
             android:layout_marginTop="8dp"
             android:hint="Thuốc đang dùng"
             android:inputType="textCapSentences|textMultiLine" />
-
         <EditText
             android:id="@+id/etDiseaseStage"
             android:layout_width="match_parent"
@@ -57,12 +52,29 @@
             android:hint="Giai đoạn bệnh"
             android:inputType="textCapSentences" />
 
-        <Button
-            android:id="@+id/btnSave"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lưu bệnh án"
-            android:layout_marginTop="24dp" /> <!-- Tăng margin top cho Button -->
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Lưu vào máy"/>
+
+            <Button
+                android:id="@+id/btnGetAdvice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Nhận tư vấn AI"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

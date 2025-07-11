@@ -70,4 +70,10 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.google.android.material:material:1.11.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Để tự động chuyển đổi JSON sang Java Object
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3") // Retrofit sử dụng OkHttp
+
+    // Để xử lý Uri thành File dễ dàng hơn khi upload
+    implementation ("commons-io:commons-io:2.11.0") // Thư viện tiện ích
 }
